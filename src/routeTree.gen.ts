@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
@@ -54,6 +55,11 @@ const AuthenticatedAlertsRoute = AuthenticatedAlertsRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/packages': typeof AuthenticatedPackagesRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/packages': typeof AuthenticatedPackagesRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/packages': typeof AuthenticatedPackagesRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/packages'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/packages'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/packages'
     | '/_authenticated/sites'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
@@ -285,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/packages': {
+      id: '/_authenticated/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof AuthenticatedPackagesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/sites': {
@@ -371,6 +390,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
@@ -381,6 +401,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
@@ -405,13 +426,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
