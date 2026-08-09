@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as RenewRouteImport } from './routes/renew'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
@@ -50,6 +51,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RenewRoute = RenewRouteImport.update({
+  id: '/renew',
+  path: '/renew',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WifiRoute = WifiRouteImport.update({
@@ -190,6 +196,7 @@ const ApiPublicHooksOfflineSweepRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
@@ -219,6 +226,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
@@ -250,6 +258,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
@@ -281,6 +290,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/agents'
     | '/alerts'
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/agents'
     | '/alerts'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
@@ -371,6 +383,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  RenewRoute: typeof RenewRoute
   WifiRoute: typeof WifiRoute
   ApiPublicAgentBackupRoute: typeof ApiPublicAgentBackupRoute
   ApiPublicAgentCommandResultRoute: typeof ApiPublicAgentCommandResultRoute
@@ -402,6 +415,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renew': {
+      id: '/renew'
+      path: '/renew'
+      fullPath: '/renew'
+      preLoaderRoute: typeof RenewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wifi': {
@@ -629,6 +649,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  RenewRoute: RenewRoute,
   WifiRoute: WifiRoute,
   ApiPublicAgentBackupRoute: ApiPublicAgentBackupRoute,
   ApiPublicAgentCommandResultRoute: ApiPublicAgentCommandResultRoute,
