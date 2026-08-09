@@ -20,6 +20,7 @@ import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authent
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
 import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
+import { Route as AuthenticatedPppoePlansRouteImport } from './routes/_authenticated/pppoe-plans'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
@@ -87,6 +88,11 @@ const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   id: '/portal',
   path: '/portal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPppoePlansRoute = AuthenticatedPppoePlansRouteImport.update({
+  id: '/pppoe-plans',
+  path: '/pppoe-plans',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByTo {
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
+  '/_authenticated/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
     | '/packages'
     | '/payments'
     | '/portal'
+    | '/pppoe-plans'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/packages'
     | '/payments'
     | '/portal'
+    | '/pppoe-plans'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
@@ -302,6 +313,7 @@ export interface FileRouteTypes {
     | '/_authenticated/packages'
     | '/_authenticated/payments'
     | '/_authenticated/portal'
+    | '/_authenticated/pppoe-plans'
     | '/_authenticated/sites'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
@@ -410,6 +422,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pppoe-plans': {
+      id: '/_authenticated/pppoe-plans'
+      path: '/pppoe-plans'
+      fullPath: '/pppoe-plans'
+      preLoaderRoute: typeof AuthenticatedPppoePlansRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/sites': {
       id: '/_authenticated/sites'
       path: '/sites'
@@ -512,6 +531,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
+  AuthenticatedPppoePlansRoute: typeof AuthenticatedPppoePlansRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
@@ -528,6 +548,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
+  AuthenticatedPppoePlansRoute: AuthenticatedPppoePlansRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
@@ -555,13 +576,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
