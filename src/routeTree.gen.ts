@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as RenewRouteImport } from './routes/renew'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
@@ -20,7 +21,11 @@ import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authent
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
 import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
+import { Route as AuthenticatedPppoePlansRouteImport } from './routes/_authenticated/pppoe-plans'
+import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authenticated/pppoe-sessions'
+import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
+import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
@@ -46,6 +51,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RenewRoute = RenewRouteImport.update({
+  id: '/renew',
+  path: '/renew',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WifiRoute = WifiRouteImport.update({
@@ -89,9 +99,31 @@ const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   path: '/portal',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPppoePlansRoute = AuthenticatedPppoePlansRouteImport.update({
+  id: '/pppoe-plans',
+  path: '/pppoe-plans',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPppoeSessionsRoute =
+  AuthenticatedPppoeSessionsRouteImport.update({
+    id: '/pppoe-sessions',
+    path: '/pppoe-sessions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPppoeSubscribersRoute =
+  AuthenticatedPppoeSubscribersRouteImport.update({
+    id: '/pppoe-subscribers',
+    path: '/pppoe-subscribers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
   id: '/sites',
   path: '/sites',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStaticIpsRoute = AuthenticatedStaticIpsRouteImport.update({
+  id: '/static-ips',
+  path: '/static-ips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRoutersIndexRoute =
@@ -164,6 +196,7 @@ const ApiPublicHooksOfflineSweepRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
@@ -172,7 +205,11 @@ export interface FileRoutesByFullPath {
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
+  '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
+  '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
+  '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -189,6 +226,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
@@ -197,7 +235,11 @@ export interface FileRoutesByTo {
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
+  '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
+  '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
+  '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -216,6 +258,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
@@ -224,7 +267,11 @@ export interface FileRoutesById {
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
+  '/_authenticated/pppoe-plans': typeof AuthenticatedPppoePlansRoute
+  '/_authenticated/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
+  '/_authenticated/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
+  '/_authenticated/static-ips': typeof AuthenticatedStaticIpsRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
   '/_authenticated/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -243,6 +290,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/agents'
     | '/alerts'
@@ -251,7 +299,11 @@ export interface FileRouteTypes {
     | '/packages'
     | '/payments'
     | '/portal'
+    | '/pppoe-plans'
+    | '/pppoe-sessions'
+    | '/pppoe-subscribers'
     | '/sites'
+    | '/static-ips'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
@@ -268,6 +320,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/agents'
     | '/alerts'
@@ -276,7 +329,11 @@ export interface FileRouteTypes {
     | '/packages'
     | '/payments'
     | '/portal'
+    | '/pppoe-plans'
+    | '/pppoe-sessions'
+    | '/pppoe-subscribers'
     | '/sites'
+    | '/static-ips'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
@@ -294,6 +351,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/renew'
     | '/wifi'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
@@ -302,7 +360,11 @@ export interface FileRouteTypes {
     | '/_authenticated/packages'
     | '/_authenticated/payments'
     | '/_authenticated/portal'
+    | '/_authenticated/pppoe-plans'
+    | '/_authenticated/pppoe-sessions'
+    | '/_authenticated/pppoe-subscribers'
     | '/_authenticated/sites'
+    | '/_authenticated/static-ips'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
     | '/_authenticated/vouchers/$batchId'
@@ -321,6 +383,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  RenewRoute: typeof RenewRoute
   WifiRoute: typeof WifiRoute
   ApiPublicAgentBackupRoute: typeof ApiPublicAgentBackupRoute
   ApiPublicAgentCommandResultRoute: typeof ApiPublicAgentCommandResultRoute
@@ -352,6 +415,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renew': {
+      id: '/renew'
+      path: '/renew'
+      fullPath: '/renew'
+      preLoaderRoute: typeof RenewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wifi': {
@@ -410,11 +480,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pppoe-plans': {
+      id: '/_authenticated/pppoe-plans'
+      path: '/pppoe-plans'
+      fullPath: '/pppoe-plans'
+      preLoaderRoute: typeof AuthenticatedPppoePlansRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pppoe-sessions': {
+      id: '/_authenticated/pppoe-sessions'
+      path: '/pppoe-sessions'
+      fullPath: '/pppoe-sessions'
+      preLoaderRoute: typeof AuthenticatedPppoeSessionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pppoe-subscribers': {
+      id: '/_authenticated/pppoe-subscribers'
+      path: '/pppoe-subscribers'
+      fullPath: '/pppoe-subscribers'
+      preLoaderRoute: typeof AuthenticatedPppoeSubscribersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/sites': {
       id: '/_authenticated/sites'
       path: '/sites'
       fullPath: '/sites'
       preLoaderRoute: typeof AuthenticatedSitesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/static-ips': {
+      id: '/_authenticated/static-ips'
+      path: '/static-ips'
+      fullPath: '/static-ips'
+      preLoaderRoute: typeof AuthenticatedStaticIpsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/routers/': {
@@ -512,7 +610,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
+  AuthenticatedPppoePlansRoute: typeof AuthenticatedPppoePlansRoute
+  AuthenticatedPppoeSessionsRoute: typeof AuthenticatedPppoeSessionsRoute
+  AuthenticatedPppoeSubscribersRoute: typeof AuthenticatedPppoeSubscribersRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
+  AuthenticatedStaticIpsRoute: typeof AuthenticatedStaticIpsRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
   AuthenticatedVouchersBatchIdRoute: typeof AuthenticatedVouchersBatchIdRoute
@@ -528,7 +630,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
+  AuthenticatedPppoePlansRoute: AuthenticatedPppoePlansRoute,
+  AuthenticatedPppoeSessionsRoute: AuthenticatedPppoeSessionsRoute,
+  AuthenticatedPppoeSubscribersRoute: AuthenticatedPppoeSubscribersRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
+  AuthenticatedStaticIpsRoute: AuthenticatedStaticIpsRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
   AuthenticatedVouchersBatchIdRoute: AuthenticatedVouchersBatchIdRoute,
@@ -543,6 +649,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  RenewRoute: RenewRoute,
   WifiRoute: WifiRoute,
   ApiPublicAgentBackupRoute: ApiPublicAgentBackupRoute,
   ApiPublicAgentCommandResultRoute: ApiPublicAgentCommandResultRoute,
