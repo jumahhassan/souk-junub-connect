@@ -17,6 +17,7 @@ import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authenticated/hotspot-users'
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
+import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
@@ -70,6 +71,11 @@ const AuthenticatedHotspotUsersRoute =
 const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
+  '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/hotspot-users'
     | '/packages'
+    | '/payments'
     | '/portal'
     | '/sites'
     | '/routers/$routerId'
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/hotspot-users'
     | '/packages'
+    | '/payments'
     | '/portal'
     | '/sites'
     | '/routers/$routerId'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/hotspot-users'
     | '/_authenticated/packages'
+    | '/_authenticated/payments'
     | '/_authenticated/portal'
     | '/_authenticated/sites'
     | '/_authenticated/routers/$routerId'
@@ -362,6 +374,13 @@ declare module '@tanstack/react-router' {
       path: '/packages'
       fullPath: '/packages'
       preLoaderRoute: typeof AuthenticatedPackagesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/portal': {
@@ -471,6 +490,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHotspotUsersRoute: typeof AuthenticatedHotspotUsersRoute
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
+  AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
@@ -486,6 +506,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHotspotUsersRoute: AuthenticatedHotspotUsersRoute,
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
+  AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
