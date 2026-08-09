@@ -10,33 +10,237 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
+import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
+import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
+import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
+import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
+import { Route as ApiPublicAgentBackupRouteImport } from './routes/api/public/agent/backup'
+import { Route as ApiPublicAgentCommandResultRouteImport } from './routes/api/public/agent/command-result'
+import { Route as ApiPublicAgentCommandsRouteImport } from './routes/api/public/agent/commands'
+import { Route as ApiPublicAgentHeartbeatRouteImport } from './routes/api/public/agent/heartbeat'
+import { Route as ApiPublicAgentMetricsRouteImport } from './routes/api/public/agent/metrics'
+import { Route as ApiPublicAgentRegisterRouteImport } from './routes/api/public/agent/register'
+import { Route as ApiPublicHooksOfflineSweepRouteImport } from './routes/api/public/hooks/offline-sweep'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAgentsRoute = AuthenticatedAgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAlertsRoute = AuthenticatedAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
+  id: '/sites',
+  path: '/sites',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRoutersIndexRoute =
+  AuthenticatedRoutersIndexRouteImport.update({
+    id: '/routers/',
+    path: '/routers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRoutersRouterIdRoute =
+  AuthenticatedRoutersRouterIdRouteImport.update({
+    id: '/routers/$routerId',
+    path: '/routers/$routerId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRoutersNewRoute = AuthenticatedRoutersNewRouteImport.update({
+  id: '/routers/new',
+  path: '/routers/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiPublicAgentBackupRoute = ApiPublicAgentBackupRouteImport.update({
+  id: '/api/public/agent/backup',
+  path: '/api/public/agent/backup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAgentCommandResultRoute =
+  ApiPublicAgentCommandResultRouteImport.update({
+    id: '/api/public/agent/command-result',
+    path: '/api/public/agent/command-result',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicAgentCommandsRoute = ApiPublicAgentCommandsRouteImport.update({
+  id: '/api/public/agent/commands',
+  path: '/api/public/agent/commands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAgentHeartbeatRoute = ApiPublicAgentHeartbeatRouteImport.update({
+  id: '/api/public/agent/heartbeat',
+  path: '/api/public/agent/heartbeat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAgentMetricsRoute = ApiPublicAgentMetricsRouteImport.update({
+  id: '/api/public/agent/metrics',
+  path: '/api/public/agent/metrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAgentRegisterRoute = ApiPublicAgentRegisterRouteImport.update({
+  id: '/api/public/agent/register',
+  path: '/api/public/agent/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksOfflineSweepRoute =
+  ApiPublicHooksOfflineSweepRouteImport.update({
+    id: '/api/public/hooks/offline-sweep',
+    path: '/api/public/hooks/offline-sweep',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/agents': typeof AuthenticatedAgentsRoute
+  '/alerts': typeof AuthenticatedAlertsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/sites': typeof AuthenticatedSitesRoute
+  '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
+  '/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
+  '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
+  '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
+  '/api/public/agent/heartbeat': typeof ApiPublicAgentHeartbeatRoute
+  '/api/public/agent/metrics': typeof ApiPublicAgentMetricsRoute
+  '/api/public/agent/register': typeof ApiPublicAgentRegisterRoute
+  '/api/public/hooks/offline-sweep': typeof ApiPublicHooksOfflineSweepRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/agents': typeof AuthenticatedAgentsRoute
+  '/alerts': typeof AuthenticatedAlertsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/sites': typeof AuthenticatedSitesRoute
+  '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
+  '/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/routers': typeof AuthenticatedRoutersIndexRoute
+  '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
+  '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
+  '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
+  '/api/public/agent/heartbeat': typeof ApiPublicAgentHeartbeatRoute
+  '/api/public/agent/metrics': typeof ApiPublicAgentMetricsRoute
+  '/api/public/agent/register': typeof ApiPublicAgentRegisterRoute
+  '/api/public/hooks/offline-sweep': typeof ApiPublicHooksOfflineSweepRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/agents': typeof AuthenticatedAgentsRoute
+  '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/sites': typeof AuthenticatedSitesRoute
+  '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
+  '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
+  '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
+  '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
+  '/api/public/agent/heartbeat': typeof ApiPublicAgentHeartbeatRoute
+  '/api/public/agent/metrics': typeof ApiPublicAgentMetricsRoute
+  '/api/public/agent/register': typeof ApiPublicAgentRegisterRoute
+  '/api/public/hooks/offline-sweep': typeof ApiPublicHooksOfflineSweepRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/agents'
+    | '/alerts'
+    | '/dashboard'
+    | '/sites'
+    | '/routers/$routerId'
+    | '/routers/new'
+    | '/routers/'
+    | '/api/public/agent/backup'
+    | '/api/public/agent/command-result'
+    | '/api/public/agent/commands'
+    | '/api/public/agent/heartbeat'
+    | '/api/public/agent/metrics'
+    | '/api/public/agent/register'
+    | '/api/public/hooks/offline-sweep'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/agents'
+    | '/alerts'
+    | '/dashboard'
+    | '/sites'
+    | '/routers/$routerId'
+    | '/routers/new'
+    | '/routers'
+    | '/api/public/agent/backup'
+    | '/api/public/agent/command-result'
+    | '/api/public/agent/commands'
+    | '/api/public/agent/heartbeat'
+    | '/api/public/agent/metrics'
+    | '/api/public/agent/register'
+    | '/api/public/hooks/offline-sweep'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/agents'
+    | '/_authenticated/alerts'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/sites'
+    | '/_authenticated/routers/$routerId'
+    | '/_authenticated/routers/new'
+    | '/_authenticated/routers/'
+    | '/api/public/agent/backup'
+    | '/api/public/agent/command-result'
+    | '/api/public/agent/commands'
+    | '/api/public/agent/heartbeat'
+    | '/api/public/agent/metrics'
+    | '/api/public/agent/register'
+    | '/api/public/hooks/offline-sweep'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiPublicAgentBackupRoute: typeof ApiPublicAgentBackupRoute
+  ApiPublicAgentCommandResultRoute: typeof ApiPublicAgentCommandResultRoute
+  ApiPublicAgentCommandsRoute: typeof ApiPublicAgentCommandsRoute
+  ApiPublicAgentHeartbeatRoute: typeof ApiPublicAgentHeartbeatRoute
+  ApiPublicAgentMetricsRoute: typeof ApiPublicAgentMetricsRoute
+  ApiPublicAgentRegisterRoute: typeof ApiPublicAgentRegisterRoute
+  ApiPublicHooksOfflineSweepRoute: typeof ApiPublicHooksOfflineSweepRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +252,155 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/agents': {
+      id: '/_authenticated/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AuthenticatedAgentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/alerts': {
+      id: '/_authenticated/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof AuthenticatedAlertsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sites': {
+      id: '/_authenticated/sites'
+      path: '/sites'
+      fullPath: '/sites'
+      preLoaderRoute: typeof AuthenticatedSitesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/routers/': {
+      id: '/_authenticated/routers/'
+      path: '/routers'
+      fullPath: '/routers/'
+      preLoaderRoute: typeof AuthenticatedRoutersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/routers/$routerId': {
+      id: '/_authenticated/routers/$routerId'
+      path: '/routers/$routerId'
+      fullPath: '/routers/$routerId'
+      preLoaderRoute: typeof AuthenticatedRoutersRouterIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/routers/new': {
+      id: '/_authenticated/routers/new'
+      path: '/routers/new'
+      fullPath: '/routers/new'
+      preLoaderRoute: typeof AuthenticatedRoutersNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/agent/backup': {
+      id: '/api/public/agent/backup'
+      path: '/api/public/agent/backup'
+      fullPath: '/api/public/agent/backup'
+      preLoaderRoute: typeof ApiPublicAgentBackupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/agent/command-result': {
+      id: '/api/public/agent/command-result'
+      path: '/api/public/agent/command-result'
+      fullPath: '/api/public/agent/command-result'
+      preLoaderRoute: typeof ApiPublicAgentCommandResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/agent/commands': {
+      id: '/api/public/agent/commands'
+      path: '/api/public/agent/commands'
+      fullPath: '/api/public/agent/commands'
+      preLoaderRoute: typeof ApiPublicAgentCommandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/agent/heartbeat': {
+      id: '/api/public/agent/heartbeat'
+      path: '/api/public/agent/heartbeat'
+      fullPath: '/api/public/agent/heartbeat'
+      preLoaderRoute: typeof ApiPublicAgentHeartbeatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/agent/metrics': {
+      id: '/api/public/agent/metrics'
+      path: '/api/public/agent/metrics'
+      fullPath: '/api/public/agent/metrics'
+      preLoaderRoute: typeof ApiPublicAgentMetricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/agent/register': {
+      id: '/api/public/agent/register'
+      path: '/api/public/agent/register'
+      fullPath: '/api/public/agent/register'
+      preLoaderRoute: typeof ApiPublicAgentRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/offline-sweep': {
+      id: '/api/public/hooks/offline-sweep'
+      path: '/api/public/hooks/offline-sweep'
+      fullPath: '/api/public/hooks/offline-sweep'
+      preLoaderRoute: typeof ApiPublicHooksOfflineSweepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
+  AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
+  AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
+  AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
+  AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
+  AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSitesRoute: AuthenticatedSitesRoute,
+  AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
+  AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
+  AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiPublicAgentBackupRoute: ApiPublicAgentBackupRoute,
+  ApiPublicAgentCommandResultRoute: ApiPublicAgentCommandResultRoute,
+  ApiPublicAgentCommandsRoute: ApiPublicAgentCommandsRoute,
+  ApiPublicAgentHeartbeatRoute: ApiPublicAgentHeartbeatRoute,
+  ApiPublicAgentMetricsRoute: ApiPublicAgentMetricsRoute,
+  ApiPublicAgentRegisterRoute: ApiPublicAgentRegisterRoute,
+  ApiPublicHooksOfflineSweepRoute: ApiPublicHooksOfflineSweepRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
