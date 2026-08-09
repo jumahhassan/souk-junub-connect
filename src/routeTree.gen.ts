@@ -24,6 +24,7 @@ import { Route as AuthenticatedPppoePlansRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authenticated/pppoe-sessions'
 import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
+import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
@@ -114,6 +115,11 @@ const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
   path: '/sites',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStaticIpsRoute = AuthenticatedStaticIpsRouteImport.update({
+  id: '/static-ips',
+  path: '/static-ips',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRoutersIndexRoute =
   AuthenticatedRoutersIndexRouteImport.update({
     id: '/routers/',
@@ -196,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
+  '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
+  '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/_authenticated/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/_authenticated/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
+  '/_authenticated/static-ips': typeof AuthenticatedStaticIpsRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
   '/_authenticated/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
@@ -284,6 +293,7 @@ export interface FileRouteTypes {
     | '/pppoe-sessions'
     | '/pppoe-subscribers'
     | '/sites'
+    | '/static-ips'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/pppoe-sessions'
     | '/pppoe-subscribers'
     | '/sites'
+    | '/static-ips'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pppoe-sessions'
     | '/_authenticated/pppoe-subscribers'
     | '/_authenticated/sites'
+    | '/_authenticated/static-ips'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
     | '/_authenticated/vouchers/$batchId'
@@ -476,6 +488,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSitesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/static-ips': {
+      id: '/_authenticated/static-ips'
+      path: '/static-ips'
+      fullPath: '/static-ips'
+      preLoaderRoute: typeof AuthenticatedStaticIpsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/routers/': {
       id: '/_authenticated/routers/'
       path: '/routers'
@@ -575,6 +594,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPppoeSessionsRoute: typeof AuthenticatedPppoeSessionsRoute
   AuthenticatedPppoeSubscribersRoute: typeof AuthenticatedPppoeSubscribersRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
+  AuthenticatedStaticIpsRoute: typeof AuthenticatedStaticIpsRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
   AuthenticatedVouchersBatchIdRoute: typeof AuthenticatedVouchersBatchIdRoute
@@ -594,6 +614,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPppoeSessionsRoute: AuthenticatedPppoeSessionsRoute,
   AuthenticatedPppoeSubscribersRoute: AuthenticatedPppoeSubscribersRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
+  AuthenticatedStaticIpsRoute: AuthenticatedStaticIpsRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
   AuthenticatedVouchersBatchIdRoute: AuthenticatedVouchersBatchIdRoute,
