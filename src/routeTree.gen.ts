@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -45,6 +46,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WifiRoute = WifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAgentsRoute = AuthenticatedAgentsRouteImport.update({
@@ -158,6 +164,7 @@ const ApiPublicHooksOfflineSweepRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/wifi'
     | '/agents'
     | '/alerts'
     | '/dashboard'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/wifi'
     | '/agents'
     | '/alerts'
     | '/dashboard'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/wifi'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
@@ -309,6 +321,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  WifiRoute: typeof WifiRoute
   ApiPublicAgentBackupRoute: typeof ApiPublicAgentBackupRoute
   ApiPublicAgentCommandResultRoute: typeof ApiPublicAgentCommandResultRoute
   ApiPublicAgentCommandsRoute: typeof ApiPublicAgentCommandsRoute
@@ -339,6 +352,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wifi': {
+      id: '/wifi'
+      path: '/wifi'
+      fullPath: '/wifi'
+      preLoaderRoute: typeof WifiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/agents': {
@@ -523,6 +543,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  WifiRoute: WifiRoute,
   ApiPublicAgentBackupRoute: ApiPublicAgentBackupRoute,
   ApiPublicAgentCommandResultRoute: ApiPublicAgentCommandResultRoute,
   ApiPublicAgentCommandsRoute: ApiPublicAgentCommandsRoute,
