@@ -303,19 +303,20 @@ function PortalPage() {
                 <CardTitle className="text-base">Login methods</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {[
-                  ["allow_voucher", "Voucher code entry"],
-                  ["allow_userpass", "Username &amp; password"],
-                  ["allow_otp", "Phone number + OTP"],
-                ].map(([key, label]) => (
+                {([
+                  { key: "allow_voucher", label: "Voucher code entry" },
+                  { key: "allow_userpass", label: "Username & password" },
+                  { key: "allow_otp", label: "Phone number + OTP" },
+                ] as const).map(({ key, label }) => (
                   <div
                     key={key}
                     className="flex items-center justify-between rounded-md border border-border px-3 py-2"
                   >
-                    <p className="text-sm">{label.replace("&amp;", "&")}</p>
+                    <p className="text-sm">{label}</p>
                     <Switch checked={form[key]} onCheckedChange={(v) => set({ [key]: v })} />
                   </div>
                 ))}
+
               </CardContent>
             </Card>
             <Card>
