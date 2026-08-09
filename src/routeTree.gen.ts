@@ -20,6 +20,7 @@ import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
+import { Route as AuthenticatedVouchersIndexRouteImport } from './routes/_authenticated/vouchers.index'
 import { Route as ApiPublicAgentBackupRouteImport } from './routes/api/public/agent/backup'
 import { Route as ApiPublicAgentCommandResultRouteImport } from './routes/api/public/agent/command-result'
 import { Route as ApiPublicAgentCommandsRouteImport } from './routes/api/public/agent/commands'
@@ -84,6 +85,12 @@ const AuthenticatedRoutersNewRoute = AuthenticatedRoutersNewRouteImport.update({
   path: '/routers/new',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVouchersIndexRoute =
+  AuthenticatedVouchersIndexRouteImport.update({
+    id: '/vouchers/',
+    path: '/vouchers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicAgentBackupRoute = ApiPublicAgentBackupRouteImport.update({
   id: '/api/public/agent/backup',
   path: '/api/public/agent/backup',
@@ -133,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -152,6 +160,7 @@ export interface FileRoutesByTo {
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/routers': typeof AuthenticatedRoutersIndexRoute
+  '/vouchers': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -173,6 +182,7 @@ export interface FileRoutesById {
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
   '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/routers/$routerId'
     | '/routers/new'
     | '/routers/'
+    | '/vouchers/'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/routers/$routerId'
     | '/routers/new'
     | '/routers'
+    | '/vouchers'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -233,6 +245,7 @@ export interface FileRouteTypes {
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
     | '/_authenticated/routers/'
+    | '/_authenticated/vouchers/'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -334,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRoutersNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vouchers/': {
+      id: '/_authenticated/vouchers/'
+      path: '/vouchers'
+      fullPath: '/vouchers/'
+      preLoaderRoute: typeof AuthenticatedVouchersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/agent/backup': {
       id: '/api/public/agent/backup'
       path: '/api/public/agent/backup'
@@ -395,6 +415,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
   AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
+  AuthenticatedVouchersIndexRoute: typeof AuthenticatedVouchersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -406,6 +427,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
   AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
+  AuthenticatedVouchersIndexRoute: AuthenticatedVouchersIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
