@@ -230,7 +230,13 @@ export async function setSubscriberStatusRecord(
 export async function renewSubscriberRecord(
   db: DB,
   userId: string | null,
-  input: { subscriberId: string; cycles: number; amountSsp?: number | null; provider?: string; reference?: string | null },
+  input: {
+    subscriberId: string;
+    cycles: number;
+    amountSsp?: number | null | undefined;
+    provider?: string | undefined;
+    reference?: string | null | undefined;
+  },
 ) {
   if (userId) await assertWriter(db, userId);
   const subscriber = unwrap(
