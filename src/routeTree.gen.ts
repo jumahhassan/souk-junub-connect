@@ -12,13 +12,20 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authenticated/hotspot-users'
+import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
+import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
+import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
+import { Route as AuthenticatedVouchersIndexRouteImport } from './routes/_authenticated/vouchers.index'
+import { Route as AuthenticatedVouchersBatchIdRouteImport } from './routes/_authenticated/vouchers.$batchId'
 import { Route as ApiPublicAgentBackupRouteImport } from './routes/api/public/agent/backup'
 import { Route as ApiPublicAgentCommandResultRouteImport } from './routes/api/public/agent/command-result'
 import { Route as ApiPublicAgentCommandsRouteImport } from './routes/api/public/agent/commands'
@@ -41,6 +48,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WifiRoute = WifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAgentsRoute = AuthenticatedAgentsRouteImport.update({
   id: '/agents',
   path: '/agents',
@@ -54,6 +66,27 @@ const AuthenticatedAlertsRoute = AuthenticatedAlertsRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHotspotUsersRoute =
+  AuthenticatedHotspotUsersRouteImport.update({
+    id: '/hotspot-users',
+    path: '/hotspot-users',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
@@ -78,6 +111,18 @@ const AuthenticatedRoutersNewRoute = AuthenticatedRoutersNewRouteImport.update({
   path: '/routers/new',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVouchersIndexRoute =
+  AuthenticatedVouchersIndexRouteImport.update({
+    id: '/vouchers/',
+    path: '/vouchers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVouchersBatchIdRoute =
+  AuthenticatedVouchersBatchIdRouteImport.update({
+    id: '/vouchers/$batchId',
+    path: '/vouchers/$batchId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicAgentBackupRoute = ApiPublicAgentBackupRouteImport.update({
   id: '/api/public/agent/backup',
   path: '/api/public/agent/backup',
@@ -119,13 +164,20 @@ const ApiPublicHooksOfflineSweepRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/portal': typeof AuthenticatedPortalRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
   '/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -137,13 +189,20 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/packages': typeof AuthenticatedPackagesRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/portal': typeof AuthenticatedPortalRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
   '/routers': typeof AuthenticatedRoutersIndexRoute
+  '/vouchers': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -157,13 +216,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/wifi': typeof WifiRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/_authenticated/packages': typeof AuthenticatedPackagesRoute
+  '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
+  '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
+  '/_authenticated/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
   '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
+  '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
   '/api/public/agent/command-result': typeof ApiPublicAgentCommandResultRoute
   '/api/public/agent/commands': typeof ApiPublicAgentCommandsRoute
@@ -177,13 +243,20 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/wifi'
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/hotspot-users'
+    | '/packages'
+    | '/payments'
+    | '/portal'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
+    | '/vouchers/$batchId'
     | '/routers/'
+    | '/vouchers/'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -195,13 +268,20 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/wifi'
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/hotspot-users'
+    | '/packages'
+    | '/payments'
+    | '/portal'
     | '/sites'
     | '/routers/$routerId'
     | '/routers/new'
+    | '/vouchers/$batchId'
     | '/routers'
+    | '/vouchers'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -214,13 +294,20 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/wifi'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/hotspot-users'
+    | '/_authenticated/packages'
+    | '/_authenticated/payments'
+    | '/_authenticated/portal'
     | '/_authenticated/sites'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
+    | '/_authenticated/vouchers/$batchId'
     | '/_authenticated/routers/'
+    | '/_authenticated/vouchers/'
     | '/api/public/agent/backup'
     | '/api/public/agent/command-result'
     | '/api/public/agent/commands'
@@ -234,6 +321,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  WifiRoute: typeof WifiRoute
   ApiPublicAgentBackupRoute: typeof ApiPublicAgentBackupRoute
   ApiPublicAgentCommandResultRoute: typeof ApiPublicAgentCommandResultRoute
   ApiPublicAgentCommandsRoute: typeof ApiPublicAgentCommandsRoute
@@ -266,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wifi': {
+      id: '/wifi'
+      path: '/wifi'
+      fullPath: '/wifi'
+      preLoaderRoute: typeof WifiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/agents': {
       id: '/_authenticated/agents'
       path: '/agents'
@@ -285,6 +380,34 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/hotspot-users': {
+      id: '/_authenticated/hotspot-users'
+      path: '/hotspot-users'
+      fullPath: '/hotspot-users'
+      preLoaderRoute: typeof AuthenticatedHotspotUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/packages': {
+      id: '/_authenticated/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof AuthenticatedPackagesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal': {
+      id: '/_authenticated/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof AuthenticatedPortalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/sites': {
@@ -313,6 +436,20 @@ declare module '@tanstack/react-router' {
       path: '/routers/new'
       fullPath: '/routers/new'
       preLoaderRoute: typeof AuthenticatedRoutersNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vouchers/': {
+      id: '/_authenticated/vouchers/'
+      path: '/vouchers'
+      fullPath: '/vouchers/'
+      preLoaderRoute: typeof AuthenticatedVouchersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vouchers/$batchId': {
+      id: '/_authenticated/vouchers/$batchId'
+      path: '/vouchers/$batchId'
+      fullPath: '/vouchers/$batchId'
+      preLoaderRoute: typeof AuthenticatedVouchersBatchIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/public/agent/backup': {
@@ -371,20 +508,32 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedHotspotUsersRoute: typeof AuthenticatedHotspotUsersRoute
+  AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
+  AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
+  AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
+  AuthenticatedVouchersBatchIdRoute: typeof AuthenticatedVouchersBatchIdRoute
   AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
+  AuthenticatedVouchersIndexRoute: typeof AuthenticatedVouchersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedHotspotUsersRoute: AuthenticatedHotspotUsersRoute,
+  AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
+  AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
+  AuthenticatedPortalRoute: AuthenticatedPortalRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
+  AuthenticatedVouchersBatchIdRoute: AuthenticatedVouchersBatchIdRoute,
   AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
+  AuthenticatedVouchersIndexRoute: AuthenticatedVouchersIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -394,6 +543,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  WifiRoute: WifiRoute,
   ApiPublicAgentBackupRoute: ApiPublicAgentBackupRoute,
   ApiPublicAgentCommandResultRoute: ApiPublicAgentCommandResultRoute,
   ApiPublicAgentCommandsRoute: ApiPublicAgentCommandsRoute,
@@ -405,13 +555,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

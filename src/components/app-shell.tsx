@@ -2,12 +2,17 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Activity,
   BellRing,
+  CreditCard,
   LayoutDashboard,
   LogOut,
   MapPin,
+  Package,
+  Palette,
   Radio,
   Router as RouterIcon,
   ServerCog,
+  Ticket,
+  Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,10 +21,16 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/routers", label: "Routers", icon: RouterIcon },
+  { to: "/packages", label: "Packages", icon: Package },
+  { to: "/vouchers", label: "Vouchers", icon: Ticket },
+  { to: "/hotspot-users", label: "Hotspot users", icon: Users },
+  { to: "/payments", label: "Payments", icon: CreditCard },
+  { to: "/portal", label: "Portal", icon: Palette },
   { to: "/sites", label: "Sites", icon: MapPin },
   { to: "/agents", label: "Agents", icon: ServerCog },
   { to: "/alerts", label: "Alerts", icon: BellRing },
 ] as const;
+
 
 export function AppShell({
   title,
