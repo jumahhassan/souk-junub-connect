@@ -526,6 +526,8 @@ export type Database = {
           msisdn: string | null
           package_id: string | null
           paid_at: string | null
+          pppoe_invoice_id: string | null
+          pppoe_subscriber_id: string | null
           provider: string
           provider_reference: string | null
           receipt_number: string | null
@@ -546,6 +548,8 @@ export type Database = {
           msisdn?: string | null
           package_id?: string | null
           paid_at?: string | null
+          pppoe_invoice_id?: string | null
+          pppoe_subscriber_id?: string | null
           provider?: string
           provider_reference?: string | null
           receipt_number?: string | null
@@ -566,6 +570,8 @@ export type Database = {
           msisdn?: string | null
           package_id?: string | null
           paid_at?: string | null
+          pppoe_invoice_id?: string | null
+          pppoe_subscriber_id?: string | null
           provider?: string
           provider_reference?: string | null
           receipt_number?: string | null
@@ -589,6 +595,20 @@ export type Database = {
             columns: ["package_id"]
             isOneToOne: false
             referencedRelation: "hotspot_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_pppoe_invoice_id_fkey"
+            columns: ["pppoe_invoice_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_pppoe_subscriber_id_fkey"
+            columns: ["pppoe_subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_subscribers"
             referencedColumns: ["id"]
           },
           {
@@ -756,6 +776,349 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "portal_settings_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pppoe_invoices: {
+        Row: {
+          amount_ssp: number
+          created_at: string
+          due_at: string | null
+          id: string
+          invoice_number: string
+          paid_at: string | null
+          period_end: string
+          period_start: string
+          plan_id: string | null
+          static_ip_fee_ssp: number
+          status: string
+          subscriber_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount_ssp?: number
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          invoice_number: string
+          paid_at?: string | null
+          period_end?: string
+          period_start?: string
+          plan_id?: string | null
+          static_ip_fee_ssp?: number
+          status?: string
+          subscriber_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount_ssp?: number
+          created_at?: string
+          due_at?: string | null
+          id?: string
+          invoice_number?: string
+          paid_at?: string | null
+          period_end?: string
+          period_start?: string
+          plan_id?: string | null
+          static_ip_fee_ssp?: number
+          status?: string
+          subscriber_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pppoe_invoices_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pppoe_invoices_subscriber_id_fkey"
+            columns: ["subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pppoe_plans: {
+        Row: {
+          billing_cycle: string
+          billing_type: string
+          burst_download_kbps: number | null
+          burst_threshold_download_kbps: number | null
+          burst_threshold_upload_kbps: number | null
+          burst_time_seconds: number | null
+          burst_upload_kbps: number | null
+          change_tcp_mss: boolean
+          created_at: string
+          created_by: string | null
+          description: string | null
+          dns_servers: string | null
+          download_kbps: number
+          fup_after_gb: number | null
+          fup_download_kbps: number | null
+          fup_enabled: boolean
+          fup_upload_kbps: number | null
+          id: string
+          is_active: boolean
+          local_address: string | null
+          name: string
+          only_one: boolean
+          price_ssp: number
+          profile_name: string
+          remote_address_pool: string | null
+          sort_order: number
+          updated_at: string
+          upload_kbps: number
+          use_compression: boolean
+          use_encryption: boolean
+        }
+        Insert: {
+          billing_cycle?: string
+          billing_type?: string
+          burst_download_kbps?: number | null
+          burst_threshold_download_kbps?: number | null
+          burst_threshold_upload_kbps?: number | null
+          burst_time_seconds?: number | null
+          burst_upload_kbps?: number | null
+          change_tcp_mss?: boolean
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          dns_servers?: string | null
+          download_kbps?: number
+          fup_after_gb?: number | null
+          fup_download_kbps?: number | null
+          fup_enabled?: boolean
+          fup_upload_kbps?: number | null
+          id?: string
+          is_active?: boolean
+          local_address?: string | null
+          name: string
+          only_one?: boolean
+          price_ssp?: number
+          profile_name: string
+          remote_address_pool?: string | null
+          sort_order?: number
+          updated_at?: string
+          upload_kbps?: number
+          use_compression?: boolean
+          use_encryption?: boolean
+        }
+        Update: {
+          billing_cycle?: string
+          billing_type?: string
+          burst_download_kbps?: number | null
+          burst_threshold_download_kbps?: number | null
+          burst_threshold_upload_kbps?: number | null
+          burst_time_seconds?: number | null
+          burst_upload_kbps?: number | null
+          change_tcp_mss?: boolean
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          dns_servers?: string | null
+          download_kbps?: number
+          fup_after_gb?: number | null
+          fup_download_kbps?: number | null
+          fup_enabled?: boolean
+          fup_upload_kbps?: number | null
+          id?: string
+          is_active?: boolean
+          local_address?: string | null
+          name?: string
+          only_one?: boolean
+          price_ssp?: number
+          profile_name?: string
+          remote_address_pool?: string | null
+          sort_order?: number
+          updated_at?: string
+          upload_kbps?: number
+          use_compression?: boolean
+          use_encryption?: boolean
+        }
+        Relationships: []
+      }
+      pppoe_sessions: {
+        Row: {
+          caller_id: string | null
+          disconnect_reason: string | null
+          ended_at: string | null
+          id: string
+          ip_address: string | null
+          is_active: boolean
+          profile_name: string | null
+          router_id: string | null
+          rx_bytes: number
+          rx_rate_kbps: number
+          service: string
+          started_at: string
+          subscriber_id: string | null
+          tx_bytes: number
+          tx_rate_kbps: number
+          uptime_seconds: number
+          username: string
+        }
+        Insert: {
+          caller_id?: string | null
+          disconnect_reason?: string | null
+          ended_at?: string | null
+          id?: string
+          ip_address?: string | null
+          is_active?: boolean
+          profile_name?: string | null
+          router_id?: string | null
+          rx_bytes?: number
+          rx_rate_kbps?: number
+          service?: string
+          started_at?: string
+          subscriber_id?: string | null
+          tx_bytes?: number
+          tx_rate_kbps?: number
+          uptime_seconds?: number
+          username: string
+        }
+        Update: {
+          caller_id?: string | null
+          disconnect_reason?: string | null
+          ended_at?: string | null
+          id?: string
+          ip_address?: string | null
+          is_active?: boolean
+          profile_name?: string | null
+          router_id?: string | null
+          rx_bytes?: number
+          rx_rate_kbps?: number
+          service?: string
+          started_at?: string
+          subscriber_id?: string | null
+          tx_bytes?: number
+          tx_rate_kbps?: number
+          uptime_seconds?: number
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pppoe_sessions_router_id_fkey"
+            columns: ["router_id"]
+            isOneToOne: false
+            referencedRelation: "routers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pppoe_sessions_subscriber_id_fkey"
+            columns: ["subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pppoe_subscribers: {
+        Row: {
+          activated_at: string | null
+          address: string | null
+          auto_renew: boolean
+          balance_ssp: number
+          caller_id: string | null
+          comment: string | null
+          created_at: string
+          created_by: string | null
+          email: string | null
+          expires_at: string | null
+          full_name: string | null
+          id: string
+          is_online: boolean
+          last_seen_at: string | null
+          local_address: string | null
+          password: string
+          phone: string | null
+          plan_id: string | null
+          remote_address: string | null
+          router_id: string | null
+          service: string
+          site_id: string | null
+          status: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          activated_at?: string | null
+          address?: string | null
+          auto_renew?: boolean
+          balance_ssp?: number
+          caller_id?: string | null
+          comment?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          expires_at?: string | null
+          full_name?: string | null
+          id?: string
+          is_online?: boolean
+          last_seen_at?: string | null
+          local_address?: string | null
+          password: string
+          phone?: string | null
+          plan_id?: string | null
+          remote_address?: string | null
+          router_id?: string | null
+          service?: string
+          site_id?: string | null
+          status?: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          activated_at?: string | null
+          address?: string | null
+          auto_renew?: boolean
+          balance_ssp?: number
+          caller_id?: string | null
+          comment?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          expires_at?: string | null
+          full_name?: string | null
+          id?: string
+          is_online?: boolean
+          last_seen_at?: string | null
+          local_address?: string | null
+          password?: string
+          phone?: string | null
+          plan_id?: string | null
+          remote_address?: string | null
+          router_id?: string | null
+          service?: string
+          site_id?: string | null
+          status?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pppoe_subscribers_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pppoe_subscribers_router_id_fkey"
+            columns: ["router_id"]
+            isOneToOne: false
+            referencedRelation: "routers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pppoe_subscribers_site_id_fkey"
             columns: ["site_id"]
             isOneToOne: false
             referencedRelation: "sites"
@@ -1251,6 +1614,72 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      static_ip_allocations: {
+        Row: {
+          assigned_at: string
+          created_at: string
+          created_by: string | null
+          id: string
+          ip_address: string
+          label: string | null
+          mac_address: string | null
+          monthly_fee_ssp: number
+          notes: string | null
+          released_at: string | null
+          router_id: string | null
+          status: string
+          subscriber_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_at?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          ip_address: string
+          label?: string | null
+          mac_address?: string | null
+          monthly_fee_ssp?: number
+          notes?: string | null
+          released_at?: string | null
+          router_id?: string | null
+          status?: string
+          subscriber_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_at?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          ip_address?: string
+          label?: string | null
+          mac_address?: string | null
+          monthly_fee_ssp?: number
+          notes?: string | null
+          released_at?: string | null
+          router_id?: string | null
+          status?: string
+          subscriber_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "static_ip_allocations_router_id_fkey"
+            columns: ["router_id"]
+            isOneToOne: false
+            referencedRelation: "routers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "static_ip_allocations_subscriber_id_fkey"
+            columns: ["subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       trial_grants: {
         Row: {
