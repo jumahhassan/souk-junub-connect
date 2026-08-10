@@ -26,6 +26,7 @@ import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authen
 import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
+import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
 import { Route as AuthenticatedCustomersIndexRouteImport } from './routes/_authenticated/customers.index'
 import { Route as AuthenticatedCustomersCustomerIdRouteImport } from './routes/_authenticated/customers.$customerId'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
@@ -128,6 +129,11 @@ const AuthenticatedStaticIpsRoute = AuthenticatedStaticIpsRouteImport.update({
   path: '/static-ips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCustomersIndexRoute =
   AuthenticatedCustomersIndexRouteImport.update({
     id: '/customers/',
@@ -224,6 +230,7 @@ export interface FileRoutesByFullPath {
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -256,6 +263,7 @@ export interface FileRoutesByTo {
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -290,6 +298,7 @@ export interface FileRoutesById {
   '/_authenticated/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
   '/_authenticated/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
@@ -324,6 +333,7 @@ export interface FileRouteTypes {
     | '/pppoe-subscribers'
     | '/sites'
     | '/static-ips'
+    | '/tickets'
     | '/customers/$customerId'
     | '/routers/$routerId'
     | '/routers/new'
@@ -356,6 +366,7 @@ export interface FileRouteTypes {
     | '/pppoe-subscribers'
     | '/sites'
     | '/static-ips'
+    | '/tickets'
     | '/customers/$customerId'
     | '/routers/$routerId'
     | '/routers/new'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pppoe-subscribers'
     | '/_authenticated/sites'
     | '/_authenticated/static-ips'
+    | '/_authenticated/tickets'
     | '/_authenticated/customers/$customerId'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
@@ -541,6 +553,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaticIpsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/tickets': {
+      id: '/_authenticated/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/customers/': {
       id: '/_authenticated/customers/'
       path: '/customers'
@@ -655,6 +674,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPppoeSubscribersRoute: typeof AuthenticatedPppoeSubscribersRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedStaticIpsRoute: typeof AuthenticatedStaticIpsRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
   AuthenticatedCustomersCustomerIdRoute: typeof AuthenticatedCustomersCustomerIdRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
@@ -677,6 +697,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPppoeSubscribersRoute: AuthenticatedPppoeSubscribersRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedStaticIpsRoute: AuthenticatedStaticIpsRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
   AuthenticatedCustomersCustomerIdRoute: AuthenticatedCustomersCustomerIdRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
