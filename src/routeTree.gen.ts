@@ -26,6 +26,7 @@ import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authen
 import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
+import { Route as AuthenticatedCustomersIndexRouteImport } from './routes/_authenticated/customers.index'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
@@ -126,6 +127,12 @@ const AuthenticatedStaticIpsRoute = AuthenticatedStaticIpsRouteImport.update({
   path: '/static-ips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCustomersIndexRoute =
+  AuthenticatedCustomersIndexRouteImport.update({
+    id: '/customers/',
+    path: '/customers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedRoutersIndexRoute =
   AuthenticatedRoutersIndexRouteImport.update({
     id: '/routers/',
@@ -213,6 +220,7 @@ export interface FileRoutesByFullPath {
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/customers/': typeof AuthenticatedCustomersIndexRoute
   '/routers/': typeof AuthenticatedRoutersIndexRoute
   '/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -243,6 +251,7 @@ export interface FileRoutesByTo {
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/customers': typeof AuthenticatedCustomersIndexRoute
   '/routers': typeof AuthenticatedRoutersIndexRoute
   '/vouchers': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -275,6 +284,7 @@ export interface FileRoutesById {
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
   '/_authenticated/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
   '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
+    | '/customers/'
     | '/routers/'
     | '/vouchers/'
     | '/api/public/agent/backup'
@@ -337,6 +348,7 @@ export interface FileRouteTypes {
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
+    | '/customers'
     | '/routers'
     | '/vouchers'
     | '/api/public/agent/backup'
@@ -368,6 +380,7 @@ export interface FileRouteTypes {
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
     | '/_authenticated/vouchers/$batchId'
+    | '/_authenticated/customers/'
     | '/_authenticated/routers/'
     | '/_authenticated/vouchers/'
     | '/api/public/agent/backup'
@@ -515,6 +528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaticIpsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/customers/': {
+      id: '/_authenticated/customers/'
+      path: '/customers'
+      fullPath: '/customers/'
+      preLoaderRoute: typeof AuthenticatedCustomersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/routers/': {
       id: '/_authenticated/routers/'
       path: '/routers'
@@ -618,6 +638,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
   AuthenticatedVouchersBatchIdRoute: typeof AuthenticatedVouchersBatchIdRoute
+  AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
   AuthenticatedVouchersIndexRoute: typeof AuthenticatedVouchersIndexRoute
 }
@@ -638,6 +659,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
   AuthenticatedVouchersBatchIdRoute: AuthenticatedVouchersBatchIdRoute,
+  AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
   AuthenticatedVouchersIndexRoute: AuthenticatedVouchersIndexRoute,
 }
@@ -662,13 +684,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
