@@ -264,6 +264,98 @@ export type Database = {
         }
         Relationships: []
       }
+      customers: {
+        Row: {
+          address: string | null
+          area: string | null
+          balance_ssp: number
+          created_at: string
+          created_by: string | null
+          customer_type: string
+          email: string | null
+          full_name: string
+          hotspot_user_id: string | null
+          id: string
+          national_id: string | null
+          notes: string | null
+          phone: string | null
+          pppoe_subscriber_id: string | null
+          router_id: string | null
+          site_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          area?: string | null
+          balance_ssp?: number
+          created_at?: string
+          created_by?: string | null
+          customer_type?: string
+          email?: string | null
+          full_name: string
+          hotspot_user_id?: string | null
+          id?: string
+          national_id?: string | null
+          notes?: string | null
+          phone?: string | null
+          pppoe_subscriber_id?: string | null
+          router_id?: string | null
+          site_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          area?: string | null
+          balance_ssp?: number
+          created_at?: string
+          created_by?: string | null
+          customer_type?: string
+          email?: string | null
+          full_name?: string
+          hotspot_user_id?: string | null
+          id?: string
+          national_id?: string | null
+          notes?: string | null
+          phone?: string | null
+          pppoe_subscriber_id?: string | null
+          router_id?: string | null
+          site_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customers_hotspot_user_id_fkey"
+            columns: ["hotspot_user_id"]
+            isOneToOne: false
+            referencedRelation: "hotspot_users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "customers_pppoe_subscriber_id_fkey"
+            columns: ["pppoe_subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "pppoe_subscribers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "customers_router_id_fkey"
+            columns: ["router_id"]
+            isOneToOne: false
+            referencedRelation: "routers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "customers_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hotspot_packages: {
         Row: {
           burst_download_kbps: number | null
@@ -514,6 +606,198 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      message_campaigns: {
+        Row: {
+          audience: Json
+          body: string
+          channel: string
+          created_at: string
+          created_by: string | null
+          failed_count: number
+          id: string
+          name: string
+          scheduled_for: string | null
+          sent_count: number
+          status: string
+          total_recipients: number
+          updated_at: string
+        }
+        Insert: {
+          audience?: Json
+          body: string
+          channel?: string
+          created_at?: string
+          created_by?: string | null
+          failed_count?: number
+          id?: string
+          name: string
+          scheduled_for?: string | null
+          sent_count?: number
+          status?: string
+          total_recipients?: number
+          updated_at?: string
+        }
+        Update: {
+          audience?: Json
+          body?: string
+          channel?: string
+          created_at?: string
+          created_by?: string | null
+          failed_count?: number
+          id?: string
+          name?: string
+          scheduled_for?: string | null
+          sent_count?: number
+          status?: string
+          total_recipients?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      message_log: {
+        Row: {
+          body: string
+          campaign_id: string | null
+          channel: string
+          created_at: string
+          customer_id: string | null
+          error: string | null
+          id: string
+          metadata: Json
+          provider: string | null
+          scheduled_for: string | null
+          sent_at: string | null
+          status: string
+          template_key: string | null
+          to_address: string
+        }
+        Insert: {
+          body: string
+          campaign_id?: string | null
+          channel?: string
+          created_at?: string
+          customer_id?: string | null
+          error?: string | null
+          id?: string
+          metadata?: Json
+          provider?: string | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string | null
+          to_address: string
+        }
+        Update: {
+          body?: string
+          campaign_id?: string | null
+          channel?: string
+          created_at?: string
+          customer_id?: string | null
+          error?: string | null
+          id?: string
+          metadata?: Json
+          provider?: string | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: string
+          template_key?: string | null
+          to_address?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_log_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "message_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "message_log_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_templates: {
+        Row: {
+          body: string
+          channel: string
+          created_at: string
+          id: string
+          is_active: boolean
+          key: string
+          name: string
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          channel?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          key: string
+          name: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          channel?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          key?: string
+          name?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      messaging_providers: {
+        Row: {
+          base_url: string | null
+          channel: string
+          config: Json
+          created_at: string
+          id: string
+          is_active: boolean
+          is_default: boolean
+          label: string
+          provider: string
+          sender_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          base_url?: string | null
+          channel?: string
+          config?: Json
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          label: string
+          provider: string
+          sender_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          base_url?: string | null
+          channel?: string
+          config?: Json
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          label?: string
+          provider?: string
+          sender_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       payments: {
         Row: {
@@ -1677,6 +1961,125 @@ export type Database = {
             columns: ["subscriber_id"]
             isOneToOne: false
             referencedRelation: "pppoe_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_tickets: {
+        Row: {
+          assigned_to: string | null
+          category: string
+          closed_at: string | null
+          created_at: string
+          created_by: string | null
+          customer_id: string | null
+          description: string | null
+          first_response_at: string | null
+          id: string
+          priority: string
+          resolved_at: string | null
+          router_id: string | null
+          sla_due_at: string | null
+          source: string
+          status: string
+          subject: string
+          ticket_number: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          category?: string
+          closed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string | null
+          description?: string | null
+          first_response_at?: string | null
+          id?: string
+          priority?: string
+          resolved_at?: string | null
+          router_id?: string | null
+          sla_due_at?: string | null
+          source?: string
+          status?: string
+          subject: string
+          ticket_number?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string
+          closed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string | null
+          description?: string | null
+          first_response_at?: string | null
+          id?: string
+          priority?: string
+          resolved_at?: string | null
+          router_id?: string | null
+          sla_due_at?: string | null
+          source?: string
+          status?: string
+          subject?: string
+          ticket_number?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_tickets_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "support_tickets_router_id_fkey"
+            columns: ["router_id"]
+            isOneToOne: false
+            referencedRelation: "routers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ticket_messages: {
+        Row: {
+          author_id: string | null
+          author_name: string | null
+          body: string
+          channel: string
+          created_at: string
+          id: string
+          is_internal: boolean
+          ticket_id: string
+        }
+        Insert: {
+          author_id?: string | null
+          author_name?: string | null
+          body: string
+          channel?: string
+          created_at?: string
+          id?: string
+          is_internal?: boolean
+          ticket_id: string
+        }
+        Update: {
+          author_id?: string | null
+          author_name?: string | null
+          body?: string
+          channel?: string
+          created_at?: string
+          id?: string
+          is_internal?: boolean
+          ticket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "support_tickets"
             referencedColumns: ["id"]
           },
         ]

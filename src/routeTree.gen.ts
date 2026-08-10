@@ -18,6 +18,7 @@ import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authenticated/hotspot-users'
+import { Route as AuthenticatedMessagingRouteImport } from './routes/_authenticated/messaging'
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
 import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
@@ -26,6 +27,9 @@ import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authen
 import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
+import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
+import { Route as AuthenticatedCustomersIndexRouteImport } from './routes/_authenticated/customers.index'
+import { Route as AuthenticatedCustomersCustomerIdRouteImport } from './routes/_authenticated/customers.$customerId'
 import { Route as AuthenticatedRoutersIndexRouteImport } from './routes/_authenticated/routers.index'
 import { Route as AuthenticatedRoutersRouterIdRouteImport } from './routes/_authenticated/routers.$routerId'
 import { Route as AuthenticatedRoutersNewRouteImport } from './routes/_authenticated/routers.new'
@@ -84,6 +88,11 @@ const AuthenticatedHotspotUsersRoute =
     path: '/hotspot-users',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMessagingRoute = AuthenticatedMessagingRouteImport.update({
+  id: '/messaging',
+  path: '/messaging',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
@@ -126,6 +135,23 @@ const AuthenticatedStaticIpsRoute = AuthenticatedStaticIpsRouteImport.update({
   path: '/static-ips',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTicketsRoute = AuthenticatedTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCustomersIndexRoute =
+  AuthenticatedCustomersIndexRouteImport.update({
+    id: '/customers/',
+    path: '/customers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCustomersCustomerIdRoute =
+  AuthenticatedCustomersCustomerIdRouteImport.update({
+    id: '/customers/$customerId',
+    path: '/customers/$customerId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedRoutersIndexRoute =
   AuthenticatedRoutersIndexRouteImport.update({
     id: '/routers/',
@@ -202,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
@@ -210,9 +237,12 @@ export interface FileRoutesByFullPath {
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
+  '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/customers/': typeof AuthenticatedCustomersIndexRoute
   '/routers/': typeof AuthenticatedRoutersIndexRoute
   '/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -232,6 +262,7 @@ export interface FileRoutesByTo {
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
@@ -240,9 +271,12 @@ export interface FileRoutesByTo {
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/tickets': typeof AuthenticatedTicketsRoute
+  '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/routers/new': typeof AuthenticatedRoutersNewRoute
   '/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/customers': typeof AuthenticatedCustomersIndexRoute
   '/routers': typeof AuthenticatedRoutersIndexRoute
   '/vouchers': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -264,6 +298,7 @@ export interface FileRoutesById {
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/_authenticated/messaging': typeof AuthenticatedMessagingRoute
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
@@ -272,9 +307,12 @@ export interface FileRoutesById {
   '/_authenticated/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/static-ips': typeof AuthenticatedStaticIpsRoute
+  '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
+  '/_authenticated/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
   '/_authenticated/routers/$routerId': typeof AuthenticatedRoutersRouterIdRoute
   '/_authenticated/routers/new': typeof AuthenticatedRoutersNewRoute
   '/_authenticated/vouchers/$batchId': typeof AuthenticatedVouchersBatchIdRoute
+  '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/routers/': typeof AuthenticatedRoutersIndexRoute
   '/_authenticated/vouchers/': typeof AuthenticatedVouchersIndexRoute
   '/api/public/agent/backup': typeof ApiPublicAgentBackupRoute
@@ -296,6 +334,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/dashboard'
     | '/hotspot-users'
+    | '/messaging'
     | '/packages'
     | '/payments'
     | '/portal'
@@ -304,9 +343,12 @@ export interface FileRouteTypes {
     | '/pppoe-subscribers'
     | '/sites'
     | '/static-ips'
+    | '/tickets'
+    | '/customers/$customerId'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
+    | '/customers/'
     | '/routers/'
     | '/vouchers/'
     | '/api/public/agent/backup'
@@ -326,6 +368,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/dashboard'
     | '/hotspot-users'
+    | '/messaging'
     | '/packages'
     | '/payments'
     | '/portal'
@@ -334,9 +377,12 @@ export interface FileRouteTypes {
     | '/pppoe-subscribers'
     | '/sites'
     | '/static-ips'
+    | '/tickets'
+    | '/customers/$customerId'
     | '/routers/$routerId'
     | '/routers/new'
     | '/vouchers/$batchId'
+    | '/customers'
     | '/routers'
     | '/vouchers'
     | '/api/public/agent/backup'
@@ -357,6 +403,7 @@ export interface FileRouteTypes {
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
     | '/_authenticated/hotspot-users'
+    | '/_authenticated/messaging'
     | '/_authenticated/packages'
     | '/_authenticated/payments'
     | '/_authenticated/portal'
@@ -365,9 +412,12 @@ export interface FileRouteTypes {
     | '/_authenticated/pppoe-subscribers'
     | '/_authenticated/sites'
     | '/_authenticated/static-ips'
+    | '/_authenticated/tickets'
+    | '/_authenticated/customers/$customerId'
     | '/_authenticated/routers/$routerId'
     | '/_authenticated/routers/new'
     | '/_authenticated/vouchers/$batchId'
+    | '/_authenticated/customers/'
     | '/_authenticated/routers/'
     | '/_authenticated/vouchers/'
     | '/api/public/agent/backup'
@@ -459,6 +509,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHotspotUsersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/messaging': {
+      id: '/_authenticated/messaging'
+      path: '/messaging'
+      fullPath: '/messaging'
+      preLoaderRoute: typeof AuthenticatedMessagingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/packages': {
       id: '/_authenticated/packages'
       path: '/packages'
@@ -513,6 +570,27 @@ declare module '@tanstack/react-router' {
       path: '/static-ips'
       fullPath: '/static-ips'
       preLoaderRoute: typeof AuthenticatedStaticIpsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tickets': {
+      id: '/_authenticated/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof AuthenticatedTicketsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/customers/': {
+      id: '/_authenticated/customers/'
+      path: '/customers'
+      fullPath: '/customers/'
+      preLoaderRoute: typeof AuthenticatedCustomersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/customers/$customerId': {
+      id: '/_authenticated/customers/$customerId'
+      path: '/customers/$customerId'
+      fullPath: '/customers/$customerId'
+      preLoaderRoute: typeof AuthenticatedCustomersCustomerIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/routers/': {
@@ -607,6 +685,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHotspotUsersRoute: typeof AuthenticatedHotspotUsersRoute
+  AuthenticatedMessagingRoute: typeof AuthenticatedMessagingRoute
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
@@ -615,9 +694,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPppoeSubscribersRoute: typeof AuthenticatedPppoeSubscribersRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedStaticIpsRoute: typeof AuthenticatedStaticIpsRoute
+  AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
+  AuthenticatedCustomersCustomerIdRoute: typeof AuthenticatedCustomersCustomerIdRoute
   AuthenticatedRoutersRouterIdRoute: typeof AuthenticatedRoutersRouterIdRoute
   AuthenticatedRoutersNewRoute: typeof AuthenticatedRoutersNewRoute
   AuthenticatedVouchersBatchIdRoute: typeof AuthenticatedVouchersBatchIdRoute
+  AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedRoutersIndexRoute: typeof AuthenticatedRoutersIndexRoute
   AuthenticatedVouchersIndexRoute: typeof AuthenticatedVouchersIndexRoute
 }
@@ -627,6 +709,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHotspotUsersRoute: AuthenticatedHotspotUsersRoute,
+  AuthenticatedMessagingRoute: AuthenticatedMessagingRoute,
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
@@ -635,9 +718,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPppoeSubscribersRoute: AuthenticatedPppoeSubscribersRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedStaticIpsRoute: AuthenticatedStaticIpsRoute,
+  AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
+  AuthenticatedCustomersCustomerIdRoute: AuthenticatedCustomersCustomerIdRoute,
   AuthenticatedRoutersRouterIdRoute: AuthenticatedRoutersRouterIdRoute,
   AuthenticatedRoutersNewRoute: AuthenticatedRoutersNewRoute,
   AuthenticatedVouchersBatchIdRoute: AuthenticatedVouchersBatchIdRoute,
+  AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedRoutersIndexRoute: AuthenticatedRoutersIndexRoute,
   AuthenticatedVouchersIndexRoute: AuthenticatedVouchersIndexRoute,
 }
