@@ -15,6 +15,9 @@ import {
   Router as RouterIcon,
   ServerCog,
   Ticket,
+  LifeBuoy,
+  MessageSquare,
+  Contact,
   Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -31,6 +34,9 @@ const NAV = [
   { to: "/pppoe-subscribers", label: "PPPoE subscribers", icon: Users },
   { to: "/pppoe-sessions", label: "PPPoE sessions", icon: Signal },
   { to: "/static-ips", label: "Static IPs", icon: Globe },
+  { to: "/customers", label: "Customers", icon: Contact },
+  { to: "/tickets", label: "Support tickets", icon: LifeBuoy },
+  { to: "/messaging", label: "Messaging", icon: MessageSquare },
   { to: "/payments", label: "Payments", icon: CreditCard },
   { to: "/portal", label: "Portal", icon: Palette },
   { to: "/sites", label: "Sites", icon: MapPin },

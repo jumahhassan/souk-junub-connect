@@ -18,6 +18,7 @@ import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authenticated/hotspot-users'
+import { Route as AuthenticatedMessagingRouteImport } from './routes/_authenticated/messaging'
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
 import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
@@ -87,6 +88,11 @@ const AuthenticatedHotspotUsersRoute =
     path: '/hotspot-users',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMessagingRoute = AuthenticatedMessagingRouteImport.update({
+  id: '/messaging',
+  path: '/messaging',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPackagesRoute = AuthenticatedPackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
@@ -222,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
@@ -255,6 +262,7 @@ export interface FileRoutesByTo {
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
   '/payments': typeof AuthenticatedPaymentsRoute
   '/portal': typeof AuthenticatedPortalRoute
@@ -290,6 +298,7 @@ export interface FileRoutesById {
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/hotspot-users': typeof AuthenticatedHotspotUsersRoute
+  '/_authenticated/messaging': typeof AuthenticatedMessagingRoute
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/dashboard'
     | '/hotspot-users'
+    | '/messaging'
     | '/packages'
     | '/payments'
     | '/portal'
@@ -358,6 +368,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/dashboard'
     | '/hotspot-users'
+    | '/messaging'
     | '/packages'
     | '/payments'
     | '/portal'
@@ -392,6 +403,7 @@ export interface FileRouteTypes {
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
     | '/_authenticated/hotspot-users'
+    | '/_authenticated/messaging'
     | '/_authenticated/packages'
     | '/_authenticated/payments'
     | '/_authenticated/portal'
@@ -495,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/hotspot-users'
       fullPath: '/hotspot-users'
       preLoaderRoute: typeof AuthenticatedHotspotUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/messaging': {
+      id: '/_authenticated/messaging'
+      path: '/messaging'
+      fullPath: '/messaging'
+      preLoaderRoute: typeof AuthenticatedMessagingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/packages': {
@@ -666,6 +685,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHotspotUsersRoute: typeof AuthenticatedHotspotUsersRoute
+  AuthenticatedMessagingRoute: typeof AuthenticatedMessagingRoute
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
@@ -689,6 +709,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHotspotUsersRoute: AuthenticatedHotspotUsersRoute,
+  AuthenticatedMessagingRoute: AuthenticatedMessagingRoute,
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
