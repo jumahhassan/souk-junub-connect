@@ -350,13 +350,13 @@ export async function sendMessageRecord(
   db: DB,
   userId: string,
   input: {
-    customerId?: string | null;
+    customerId?: string | null | undefined;
     channel: "sms" | "whatsapp" | "email";
     to: string;
     body: string;
-    templateKey?: string | null;
-    scheduledFor?: string | null;
-    campaignId?: string | null;
+    templateKey?: string | null | undefined;
+    scheduledFor?: string | null | undefined;
+    campaignId?: string | null | undefined;
   },
 ) {
   await assertWriter(db, userId);
@@ -411,8 +411,8 @@ export async function runCampaignRecord(
     name: string;
     channel: "sms" | "whatsapp" | "email";
     body: string;
-    audience: { status?: string; customerType?: string };
-    scheduledFor?: string | null;
+    audience: { status?: string | undefined; customerType?: string | undefined };
+    scheduledFor?: string | null | undefined;
   },
 ) {
   await assertWriter(db, userId);
@@ -625,7 +625,7 @@ export async function saveTicketRecord(db: DB, userId: string, input: any) {
 export async function addTicketMessageRecord(
   db: DB,
   userId: string,
-  input: { ticketId: string; body: string; isInternal: boolean; notifyCustomer?: boolean },
+  input: { ticketId: string; body: string; isInternal: boolean; notifyCustomer?: boolean | undefined },
 ) {
   const profile = unwrap(await db.from("profiles").select("full_name").eq("id", userId).maybeSingle());
   const message = unwrap(
