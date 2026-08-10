@@ -289,7 +289,7 @@ function CustomersPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="none">Unassigned</SelectItem>
-                      {(routers ?? []).map((r: any) => (
+                      {((routers as any)?.routers ?? []).map((r: any) => (
                         <SelectItem key={r.id} value={r.id}>
                           {r.name}
                         </SelectItem>
