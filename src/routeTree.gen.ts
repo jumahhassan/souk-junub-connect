@@ -18,6 +18,8 @@ import { Route as AuthenticatedAgentPortalRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedFinanceRouteImport } from './routes/_authenticated/finance'
+import { Route as AuthenticatedGatewaysRouteImport } from './routes/_authenticated/gateways'
 import { Route as AuthenticatedHotspotUsersRouteImport } from './routes/_authenticated/hotspot-users'
 import { Route as AuthenticatedMessagingRouteImport } from './routes/_authenticated/messaging'
 import { Route as AuthenticatedPackagesRouteImport } from './routes/_authenticated/packages'
@@ -88,6 +90,16 @@ const AuthenticatedAlertsRoute = AuthenticatedAlertsRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFinanceRoute = AuthenticatedFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGatewaysRoute = AuthenticatedGatewaysRouteImport.update({
+  id: '/gateways',
+  path: '/gateways',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedHotspotUsersRoute =
@@ -241,6 +253,8 @@ export interface FileRoutesByFullPath {
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/finance': typeof AuthenticatedFinanceRoute
+  '/gateways': typeof AuthenticatedGatewaysRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
@@ -277,6 +291,8 @@ export interface FileRoutesByTo {
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/finance': typeof AuthenticatedFinanceRoute
+  '/gateways': typeof AuthenticatedGatewaysRoute
   '/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/messaging': typeof AuthenticatedMessagingRoute
   '/packages': typeof AuthenticatedPackagesRoute
@@ -315,6 +331,8 @@ export interface FileRoutesById {
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/finance': typeof AuthenticatedFinanceRoute
+  '/_authenticated/gateways': typeof AuthenticatedGatewaysRoute
   '/_authenticated/hotspot-users': typeof AuthenticatedHotspotUsersRoute
   '/_authenticated/messaging': typeof AuthenticatedMessagingRoute
   '/_authenticated/packages': typeof AuthenticatedPackagesRoute
@@ -353,6 +371,8 @@ export interface FileRouteTypes {
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/finance'
+    | '/gateways'
     | '/hotspot-users'
     | '/messaging'
     | '/packages'
@@ -389,6 +409,8 @@ export interface FileRouteTypes {
     | '/agents'
     | '/alerts'
     | '/dashboard'
+    | '/finance'
+    | '/gateways'
     | '/hotspot-users'
     | '/messaging'
     | '/packages'
@@ -426,6 +448,8 @@ export interface FileRouteTypes {
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
+    | '/_authenticated/finance'
+    | '/_authenticated/gateways'
     | '/_authenticated/hotspot-users'
     | '/_authenticated/messaging'
     | '/_authenticated/packages'
@@ -532,6 +556,20 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance': {
+      id: '/_authenticated/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof AuthenticatedFinanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/gateways': {
+      id: '/_authenticated/gateways'
+      path: '/gateways'
+      fullPath: '/gateways'
+      preLoaderRoute: typeof AuthenticatedGatewaysRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/hotspot-users': {
@@ -724,6 +762,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedFinanceRoute: typeof AuthenticatedFinanceRoute
+  AuthenticatedGatewaysRoute: typeof AuthenticatedGatewaysRoute
   AuthenticatedHotspotUsersRoute: typeof AuthenticatedHotspotUsersRoute
   AuthenticatedMessagingRoute: typeof AuthenticatedMessagingRoute
   AuthenticatedPackagesRoute: typeof AuthenticatedPackagesRoute
@@ -750,6 +790,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedFinanceRoute: AuthenticatedFinanceRoute,
+  AuthenticatedGatewaysRoute: AuthenticatedGatewaysRoute,
   AuthenticatedHotspotUsersRoute: AuthenticatedHotspotUsersRoute,
   AuthenticatedMessagingRoute: AuthenticatedMessagingRoute,
   AuthenticatedPackagesRoute: AuthenticatedPackagesRoute,

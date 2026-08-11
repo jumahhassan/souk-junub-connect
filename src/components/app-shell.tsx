@@ -19,6 +19,10 @@ import {
   MessageSquare,
   Contact,
   Users,
+  BadgePercent,
+  Store,
+  PiggyBank,
+  Landmark,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +42,10 @@ const NAV = [
   { to: "/tickets", label: "Support tickets", icon: LifeBuoy },
   { to: "/messaging", label: "Messaging", icon: MessageSquare },
   { to: "/payments", label: "Payments", icon: CreditCard },
+  { to: "/finance", label: "Finance", icon: PiggyBank },
+  { to: "/gateways", label: "Payment gateways", icon: Landmark },
+  { to: "/resellers", label: "Agents & resellers", icon: BadgePercent },
+  { to: "/agent-portal", label: "Agent portal", icon: Store },
   { to: "/portal", label: "Portal", icon: Palette },
   { to: "/sites", label: "Sites", icon: MapPin },
   { to: "/agents", label: "Agents", icon: ServerCog },
