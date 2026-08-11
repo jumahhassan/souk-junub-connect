@@ -33,7 +33,7 @@ export const Route = createFileRoute("/_authenticated/finance")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: FinancePage;
+  component: FinancePage,
 });
 
 function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
