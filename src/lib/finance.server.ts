@@ -24,7 +24,7 @@ function startOf(period: "today" | "week" | "month" | "year"): Date {
 
 export async function fetchFinanceReport(
   db: DB,
-  input: { from?: string | null; to?: string | null },
+  input: { from?: string | null | undefined; to?: string | null | undefined },
 ) {
   const from = input.from ? new Date(`${input.from}T00:00:00.000Z`) : startOf("month");
   const to = input.to ? new Date(`${input.to}T23:59:59.999Z`) : new Date();

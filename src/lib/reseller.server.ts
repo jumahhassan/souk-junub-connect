@@ -85,7 +85,7 @@ export async function deleteResellerRecord(db: DB, userId: string, resellerId: s
 export async function allocateVouchersRecord(
   db: DB,
   userId: string,
-  input: { resellerId: string; batchId: string; quantity: number; note?: string | null },
+  input: { resellerId: string; batchId: string; quantity: number; note?: string | null | undefined },
 ) {
   await assertWriter(db, userId);
   const available = unwrap(
@@ -219,7 +219,7 @@ async function resolveCommission(db: DB, reseller: any, packageId: string | null
 export async function sellVoucherRecord(
   db: DB,
   userId: string,
-  input: { voucherId: string; customerPhone?: string | null },
+  input: { voucherId: string; customerPhone?: string | null | undefined },
 ) {
   const reseller = unwrap(
     await db.from("resellers").select("*").eq("user_id", userId).maybeSingle(),
@@ -271,7 +271,7 @@ export async function sellVoucherRecord(
 export async function requestPayoutRecord(
   db: DB,
   userId: string,
-  input: { amount: number; method: string; destination?: string | null; note?: string | null },
+  input: { amount: number; method: string; destination?: string | null | undefined; note?: string | null | undefined },
 ) {
   const reseller = unwrap(
     await db.from("resellers").select("id").eq("user_id", userId).maybeSingle(),
@@ -304,7 +304,7 @@ export async function fetchPayouts(db: DB) {
 export async function decidePayoutRecord(
   db: DB,
   userId: string,
-  input: { payoutId: string; decision: "approved" | "rejected" | "paid"; reference?: string | null },
+  input: { payoutId: string; decision: "approved" | "rejected" | "paid"; reference?: string | null | undefined },
 ) {
   await assertWriter(db, userId);
   const payout = unwrap(
