@@ -264,6 +264,62 @@ export type Database = {
         }
         Relationships: []
       }
+      commission_payouts: {
+        Row: {
+          amount_ssp: number
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          destination: string | null
+          id: string
+          method: string
+          note: string | null
+          paid_at: string | null
+          reference: string | null
+          reseller_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_ssp: number
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          destination?: string | null
+          id?: string
+          method?: string
+          note?: string | null
+          paid_at?: string | null
+          reference?: string | null
+          reseller_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_ssp?: number
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          destination?: string | null
+          id?: string
+          method?: string
+          note?: string | null
+          paid_at?: string | null
+          reference?: string | null
+          reseller_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commission_payouts_reseller_id_fkey"
+            columns: ["reseller_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       customers: {
         Row: {
           address: string | null
@@ -795,6 +851,51 @@ export type Database = {
           label?: string
           provider?: string
           sender_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      payment_gateways: {
+        Row: {
+          callback_url: string | null
+          config: Json
+          created_at: string
+          currency: string
+          environment: string
+          id: string
+          is_active: boolean
+          is_default: boolean
+          label: string
+          phone_prefix: string | null
+          provider: string
+          updated_at: string
+        }
+        Insert: {
+          callback_url?: string | null
+          config?: Json
+          created_at?: string
+          currency?: string
+          environment?: string
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          label: string
+          phone_prefix?: string | null
+          provider: string
+          updated_at?: string
+        }
+        Update: {
+          callback_url?: string | null
+          config?: Json
+          created_at?: string
+          currency?: string
+          environment?: string
+          id?: string
+          is_active?: boolean
+          is_default?: boolean
+          label?: string
+          phone_prefix?: string | null
+          provider?: string
           updated_at?: string
         }
         Relationships: []
@@ -1531,6 +1632,252 @@ export type Database = {
           },
         ]
       }
+      reseller_allocations: {
+        Row: {
+          batch_id: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          note: string | null
+          package_id: string | null
+          quantity: number
+          reseller_id: string
+        }
+        Insert: {
+          batch_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          package_id?: string | null
+          quantity?: number
+          reseller_id: string
+        }
+        Update: {
+          batch_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          package_id?: string | null
+          quantity?: number
+          reseller_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reseller_allocations_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "voucher_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_allocations_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "hotspot_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_allocations_reseller_id_fkey"
+            columns: ["reseller_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reseller_commission_rules: {
+        Row: {
+          commission_rate: number
+          commission_type: string
+          created_at: string
+          id: string
+          package_id: string | null
+          reseller_id: string
+        }
+        Insert: {
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          id?: string
+          package_id?: string | null
+          reseller_id: string
+        }
+        Update: {
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          id?: string
+          package_id?: string | null
+          reseller_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reseller_commission_rules_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "hotspot_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_commission_rules_reseller_id_fkey"
+            columns: ["reseller_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reseller_sales: {
+        Row: {
+          commission_ssp: number
+          created_at: string
+          customer_phone: string | null
+          id: string
+          package_id: string | null
+          payment_id: string | null
+          payout_id: string | null
+          price_ssp: number
+          reseller_id: string
+          settled: boolean
+          sold_at: string
+          voucher_id: string | null
+        }
+        Insert: {
+          commission_ssp?: number
+          created_at?: string
+          customer_phone?: string | null
+          id?: string
+          package_id?: string | null
+          payment_id?: string | null
+          payout_id?: string | null
+          price_ssp?: number
+          reseller_id: string
+          settled?: boolean
+          sold_at?: string
+          voucher_id?: string | null
+        }
+        Update: {
+          commission_ssp?: number
+          created_at?: string
+          customer_phone?: string | null
+          id?: string
+          package_id?: string | null
+          payment_id?: string | null
+          payout_id?: string | null
+          price_ssp?: number
+          reseller_id?: string
+          settled?: boolean
+          sold_at?: string
+          voucher_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reseller_sales_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "hotspot_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_sales_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_sales_payout_fk"
+            columns: ["payout_id"]
+            isOneToOne: false
+            referencedRelation: "commission_payouts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_sales_reseller_id_fkey"
+            columns: ["reseller_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reseller_sales_voucher_id_fkey"
+            columns: ["voucher_id"]
+            isOneToOne: false
+            referencedRelation: "vouchers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resellers: {
+        Row: {
+          area: string | null
+          balance_ssp: number
+          code: string
+          commission_rate: number
+          commission_type: string
+          created_at: string
+          created_by: string | null
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          parent_id: string | null
+          phone: string | null
+          status: string
+          tier: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          area?: string | null
+          balance_ssp?: number
+          code: string
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          parent_id?: string | null
+          phone?: string | null
+          status?: string
+          tier?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          area?: string | null
+          balance_ssp?: number
+          code?: string
+          commission_rate?: number
+          commission_type?: string
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          parent_id?: string | null
+          phone?: string | null
+          status?: string
+          tier?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resellers_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       router_agents: {
         Row: {
           created_at: string
@@ -2221,6 +2568,7 @@ export type Database = {
           package_id: string
           phone: string | null
           price_ssp: number
+          reseller_id: string | null
           router_id: string | null
           state: string
           updated_at: string
@@ -2240,6 +2588,7 @@ export type Database = {
           package_id: string
           phone?: string | null
           price_ssp?: number
+          reseller_id?: string | null
           router_id?: string | null
           state?: string
           updated_at?: string
@@ -2259,6 +2608,7 @@ export type Database = {
           package_id?: string
           phone?: string | null
           price_ssp?: number
+          reseller_id?: string | null
           router_id?: string | null
           state?: string
           updated_at?: string
@@ -2277,6 +2627,13 @@ export type Database = {
             columns: ["package_id"]
             isOneToOne: false
             referencedRelation: "hotspot_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vouchers_reseller_id_fkey"
+            columns: ["reseller_id"]
+            isOneToOne: false
+            referencedRelation: "resellers"
             referencedColumns: ["id"]
           },
           {
