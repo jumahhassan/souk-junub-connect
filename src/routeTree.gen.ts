@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as RenewRouteImport } from './routes/renew'
 import { Route as WifiRouteImport } from './routes/wifi'
+import { Route as AuthenticatedAgentPortalRouteImport } from './routes/_authenticated/agent-portal'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -25,6 +26,7 @@ import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPppoePlansRouteImport } from './routes/_authenticated/pppoe-plans'
 import { Route as AuthenticatedPppoeSessionsRouteImport } from './routes/_authenticated/pppoe-sessions'
 import { Route as AuthenticatedPppoeSubscribersRouteImport } from './routes/_authenticated/pppoe-subscribers'
+import { Route as AuthenticatedResellersRouteImport } from './routes/_authenticated/resellers'
 import { Route as AuthenticatedSitesRouteImport } from './routes/_authenticated/sites'
 import { Route as AuthenticatedStaticIpsRouteImport } from './routes/_authenticated/static-ips'
 import { Route as AuthenticatedTicketsRouteImport } from './routes/_authenticated/tickets'
@@ -67,6 +69,12 @@ const WifiRoute = WifiRouteImport.update({
   path: '/wifi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgentPortalRoute =
+  AuthenticatedAgentPortalRouteImport.update({
+    id: '/agent-portal',
+    path: '/agent-portal',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAgentsRoute = AuthenticatedAgentsRouteImport.update({
   id: '/agents',
   path: '/agents',
@@ -125,6 +133,11 @@ const AuthenticatedPppoeSubscribersRoute =
     path: '/pppoe-subscribers',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedResellersRoute = AuthenticatedResellersRouteImport.update({
+  id: '/resellers',
+  path: '/resellers',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSitesRoute = AuthenticatedSitesRouteImport.update({
   id: '/sites',
   path: '/sites',
@@ -224,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
+  '/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -235,6 +249,7 @@ export interface FileRoutesByFullPath {
   '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
+  '/resellers': typeof AuthenticatedResellersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/tickets': typeof AuthenticatedTicketsRoute
@@ -258,6 +273,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
+  '/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -269,6 +285,7 @@ export interface FileRoutesByTo {
   '/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
+  '/resellers': typeof AuthenticatedResellersRoute
   '/sites': typeof AuthenticatedSitesRoute
   '/static-ips': typeof AuthenticatedStaticIpsRoute
   '/tickets': typeof AuthenticatedTicketsRoute
@@ -294,6 +311,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/renew': typeof RenewRoute
   '/wifi': typeof WifiRoute
+  '/_authenticated/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -305,6 +323,7 @@ export interface FileRoutesById {
   '/_authenticated/pppoe-plans': typeof AuthenticatedPppoePlansRoute
   '/_authenticated/pppoe-sessions': typeof AuthenticatedPppoeSessionsRoute
   '/_authenticated/pppoe-subscribers': typeof AuthenticatedPppoeSubscribersRoute
+  '/_authenticated/resellers': typeof AuthenticatedResellersRoute
   '/_authenticated/sites': typeof AuthenticatedSitesRoute
   '/_authenticated/static-ips': typeof AuthenticatedStaticIpsRoute
   '/_authenticated/tickets': typeof AuthenticatedTicketsRoute
@@ -330,6 +349,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/renew'
     | '/wifi'
+    | '/agent-portal'
     | '/agents'
     | '/alerts'
     | '/dashboard'
@@ -341,6 +361,7 @@ export interface FileRouteTypes {
     | '/pppoe-plans'
     | '/pppoe-sessions'
     | '/pppoe-subscribers'
+    | '/resellers'
     | '/sites'
     | '/static-ips'
     | '/tickets'
@@ -364,6 +385,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/renew'
     | '/wifi'
+    | '/agent-portal'
     | '/agents'
     | '/alerts'
     | '/dashboard'
@@ -375,6 +397,7 @@ export interface FileRouteTypes {
     | '/pppoe-plans'
     | '/pppoe-sessions'
     | '/pppoe-subscribers'
+    | '/resellers'
     | '/sites'
     | '/static-ips'
     | '/tickets'
@@ -399,6 +422,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/renew'
     | '/wifi'
+    | '/_authenticated/agent-portal'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
     | '/_authenticated/dashboard'
@@ -410,6 +434,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pppoe-plans'
     | '/_authenticated/pppoe-sessions'
     | '/_authenticated/pppoe-subscribers'
+    | '/_authenticated/resellers'
     | '/_authenticated/sites'
     | '/_authenticated/static-ips'
     | '/_authenticated/tickets'
@@ -480,6 +505,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/wifi'
       preLoaderRoute: typeof WifiRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/agent-portal': {
+      id: '/_authenticated/agent-portal'
+      path: '/agent-portal'
+      fullPath: '/agent-portal'
+      preLoaderRoute: typeof AuthenticatedAgentPortalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/agents': {
       id: '/_authenticated/agents'
@@ -556,6 +588,13 @@ declare module '@tanstack/react-router' {
       path: '/pppoe-subscribers'
       fullPath: '/pppoe-subscribers'
       preLoaderRoute: typeof AuthenticatedPppoeSubscribersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resellers': {
+      id: '/_authenticated/resellers'
+      path: '/resellers'
+      fullPath: '/resellers'
+      preLoaderRoute: typeof AuthenticatedResellersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/sites': {
@@ -681,6 +720,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgentPortalRoute: typeof AuthenticatedAgentPortalRoute
   AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
@@ -692,6 +732,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPppoePlansRoute: typeof AuthenticatedPppoePlansRoute
   AuthenticatedPppoeSessionsRoute: typeof AuthenticatedPppoeSessionsRoute
   AuthenticatedPppoeSubscribersRoute: typeof AuthenticatedPppoeSubscribersRoute
+  AuthenticatedResellersRoute: typeof AuthenticatedResellersRoute
   AuthenticatedSitesRoute: typeof AuthenticatedSitesRoute
   AuthenticatedStaticIpsRoute: typeof AuthenticatedStaticIpsRoute
   AuthenticatedTicketsRoute: typeof AuthenticatedTicketsRoute
@@ -705,6 +746,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgentPortalRoute: AuthenticatedAgentPortalRoute,
   AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
@@ -716,6 +758,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPppoePlansRoute: AuthenticatedPppoePlansRoute,
   AuthenticatedPppoeSessionsRoute: AuthenticatedPppoeSessionsRoute,
   AuthenticatedPppoeSubscribersRoute: AuthenticatedPppoeSubscribersRoute,
+  AuthenticatedResellersRoute: AuthenticatedResellersRoute,
   AuthenticatedSitesRoute: AuthenticatedSitesRoute,
   AuthenticatedStaticIpsRoute: AuthenticatedStaticIpsRoute,
   AuthenticatedTicketsRoute: AuthenticatedTicketsRoute,
@@ -748,13 +791,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
