@@ -63,7 +63,7 @@ export async function fetchAnalyticsDashboard(db: DB) {
         .select("id, username, rx_bytes, tx_bytes, started_at, is_active")
         .gte("started_at", since30.toISOString())
         .limit(5000),
-    ]).then((r) => r.map(unwrap) as any[][]);
+    ]).then((r) => r.map(unwrap)) as any;
 
   const success = payments.filter((p: any) => p.status === "success");
   const sum = (rows: any[]) => rows.reduce((a, p) => a + Number(p.amount_ssp ?? 0), 0);
@@ -247,7 +247,7 @@ export async function fetchOperationalReports(
         .lte("created_at", to.toISOString())
         .order("created_at", { ascending: false })
         .limit(1000),
-    ]).then((r) => r.map(unwrap) as any[][]);
+    ]).then((r) => r.map(unwrap)) as any;
 
   const resolved = tickets.filter((t: any) => t.resolved_at);
   const avgResolutionHours = resolved.length
