@@ -17,6 +17,7 @@ import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as AuthenticatedAgentPortalRouteImport } from './routes/_authenticated/agent-portal'
 import { Route as AuthenticatedAgentsRouteImport } from './routes/_authenticated/agents'
 import { Route as AuthenticatedAlertsRouteImport } from './routes/_authenticated/alerts'
+import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedFinanceRouteImport } from './routes/_authenticated/finance'
 import { Route as AuthenticatedGatewaysRouteImport } from './routes/_authenticated/gateways'
@@ -85,6 +86,11 @@ const AuthenticatedAgentsRoute = AuthenticatedAgentsRouteImport.update({
 const AuthenticatedAlertsRoute = AuthenticatedAlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/finance': typeof AuthenticatedFinanceRoute
   '/gateways': typeof AuthenticatedGatewaysRoute
@@ -290,6 +297,7 @@ export interface FileRoutesByTo {
   '/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/agents': typeof AuthenticatedAgentsRoute
   '/alerts': typeof AuthenticatedAlertsRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/finance': typeof AuthenticatedFinanceRoute
   '/gateways': typeof AuthenticatedGatewaysRoute
@@ -330,6 +338,7 @@ export interface FileRoutesById {
   '/_authenticated/agent-portal': typeof AuthenticatedAgentPortalRoute
   '/_authenticated/agents': typeof AuthenticatedAgentsRoute
   '/_authenticated/alerts': typeof AuthenticatedAlertsRoute
+  '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/finance': typeof AuthenticatedFinanceRoute
   '/_authenticated/gateways': typeof AuthenticatedGatewaysRoute
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/agent-portal'
     | '/agents'
     | '/alerts'
+    | '/analytics'
     | '/dashboard'
     | '/finance'
     | '/gateways'
@@ -408,6 +418,7 @@ export interface FileRouteTypes {
     | '/agent-portal'
     | '/agents'
     | '/alerts'
+    | '/analytics'
     | '/dashboard'
     | '/finance'
     | '/gateways'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/_authenticated/agent-portal'
     | '/_authenticated/agents'
     | '/_authenticated/alerts'
+    | '/_authenticated/analytics'
     | '/_authenticated/dashboard'
     | '/_authenticated/finance'
     | '/_authenticated/gateways'
@@ -549,6 +561,13 @@ declare module '@tanstack/react-router' {
       path: '/alerts'
       fullPath: '/alerts'
       preLoaderRoute: typeof AuthenticatedAlertsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/analytics': {
+      id: '/_authenticated/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AuthenticatedAnalyticsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -761,6 +780,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgentPortalRoute: typeof AuthenticatedAgentPortalRoute
   AuthenticatedAgentsRoute: typeof AuthenticatedAgentsRoute
   AuthenticatedAlertsRoute: typeof AuthenticatedAlertsRoute
+  AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedFinanceRoute: typeof AuthenticatedFinanceRoute
   AuthenticatedGatewaysRoute: typeof AuthenticatedGatewaysRoute
@@ -789,6 +809,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgentPortalRoute: AuthenticatedAgentPortalRoute,
   AuthenticatedAgentsRoute: AuthenticatedAgentsRoute,
   AuthenticatedAlertsRoute: AuthenticatedAlertsRoute,
+  AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedFinanceRoute: AuthenticatedFinanceRoute,
   AuthenticatedGatewaysRoute: AuthenticatedGatewaysRoute,
