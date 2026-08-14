@@ -122,7 +122,7 @@ export async function fetchAnalyticsDashboard(db: DB) {
       users: r.active_users ?? 0,
       cpu: Number(r.cpu_load ?? 0),
     }))
-    .sort((a, b) => b.users - a.users);
+    .sort((a: any, b: any) => b.users - a.users);
 
   // ---- Data usage trend (last 7 days from sessions)
   const usageTrend: { date: string; gb: number }[] = [];
